@@ -32,6 +32,8 @@ tar xvf xxx.tar.xz
 
 Untar the gridpack and produce the LHE files (interfaced with Pythia) + RAW-SIM
 --------------
+
+```
 cd CMSSW_9_4_9/src/MonoH_MC_2017/
 
 cd CMSSW_7_1_30/src
@@ -44,24 +46,28 @@ cp /cvmfs/cms.cern.ch/phys_generator/gridpacks/2017/13TeV/madgraph/V5_2.4.2/mono
 tar xvf xxx.tar.xz
 
 ./runcmsgrid.sh 10000 $RANDOM 1 
-
+```
 
 Set CRAB environment
 --------------
+
+```
 cmsenv (CMSSW_9_4_9)
 
 source /cvmfs/cms.cern.ch/crab3/crab.sh
 
 voms-proxy-init --voms cms --valid 168:00
-
+```
 
 CRAB info
 --------------
+
+```
 crab submit -c configFile.py
 crab status --dir/-d <CRAB-project-directory>
 crab resubmit --dir/-d <CRAB-project-directory>
 crab kill -d <CRAB-project-directory
-
+```
 Online monitoring: http://dashb-cms-job.cern.ch/dashboard/templates/task-analysis/#user=Pedro+Fernandez+Manteca&refresh=0&table=Mains&p=1&records=25&activemenu=2&pattern=&task=&from=&till=&timerange=lastWeek
 
 Documentation here: https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookCRAB3Tutorial
@@ -69,25 +75,39 @@ Documentation here: https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookCRAB3
 
 Submit the step0: Produce the GEN-SIM
 --------------
+
+```
 crab submit -c crab_cfg_step0.py -> give it as input the lhe file
+```
 
 
 Submit the step1: Produce the premix + GEN-SIM
 --------------
+
+```
 crab submit -c crab_cfg_step1.py -> search in DAS prod/phys03 your publicated output:
+```
+
 https://cmsweb.cern.ch/das/request?view=list&limit=50&instance=prod%2Fphys03&input=dataset%3D%2FCRAB_PrivateMC%2Ffernanpe*%2F*
 
 
 Submit the step2: Produce AOD
 --------------
-crab submit -c crab_cfg_step2.py -> give it as input the das output of the previous step
 
+```
+crab submit -c crab_cfg_step2.py -> give it as input the das output of the previous step
+```
 
 Submit the step3: Produce miniAOD
 --------------
-crab submit -c crab_cfg_step3.py -> give it as input the das output of the previous step
 
+```
+crab submit -c crab_cfg_step3.py -> give it as input the das output of the previous step
+```
 
 Submit the step4: Produce nanoAOD
 --------------
+
+```
 crab submit -c crab_cfg_step4.py -> give it as input the das output of the previous step
+```
