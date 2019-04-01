@@ -88,8 +88,7 @@ Submit the step1: Produce the premix + GEN-SIM
 crab submit -c crab_cfg_step1.py -> search in DAS prod/phys03 your publicated output:
 ```
 
-https://cmsweb.cern.ch/das/request?view=list&limit=50&instance=prod%2Fphys03&input=dataset%3D%2FCRAB_PrivateMC%2Ffernanpe*%2F*
-
+https://cmsweb.cern.ch/das/request?view=list&limit=50&instance=prod%2Fphys03&input=%2FCRAB_PrivateMC%2Ffernanpe*%2F*
 
 Submit the step2: Produce AOD
 --------------
