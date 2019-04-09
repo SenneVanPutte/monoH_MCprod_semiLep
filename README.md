@@ -88,8 +88,7 @@ Submit the step1: Produce the premix + GEN-SIM
 crab submit -c crab_cfg_step1.py -> search in DAS prod/phys03 your publicated output:
 ```
 
-https://cmsweb.cern.ch/das/request?view=list&limit=50&instance=prod%2Fphys03&input=dataset%3D%2FCRAB_PrivateMC%2Ffernanpe*%2F*
-
+https://cmsweb.cern.ch/das/request?view=list&limit=50&instance=prod%2Fphys03&input=%2FCRAB_PrivateMC%2Ffernanpe*%2F*
 
 Submit the step2: Produce AOD
 --------------
@@ -120,3 +119,5 @@ Added: nanoAOD das publication
 cmsDriver.py myNanoProcMc -s NANO --eventcontent NANOAODSIM --datatier NANOAODSIM --no_exec --conditions 94X_mc2017_realistic_v14 --era Run2_2017,run2_nanoAOD_94XMiniAODv1 --customise_commands="process.add_(cms.Service('InitRootHandlers', EnableIMT = cms.untracked.bool(False)))"
 ```
 - Put myNanoProcMc_NANO.py in crab_cfg_step4.py: config.JobType.psetName = 'myNanoProcMc_NANO.py'
+
+
