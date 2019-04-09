@@ -111,3 +111,12 @@ Submit the step4: Produce nanoAOD
 ```
 crab submit -c crab_cfg_step4.py -> give it as input the das output of the previous step
 ```
+
+Added: nanoAOD das publication
+
+- Generate the myNanoProcMc_NANO.py
+
+```
+cmsDriver.py myNanoProcMc -s NANO --eventcontent NANOAODSIM --datatier NANOAODSIM --no_exec --conditions 94X_mc2017_realistic_v14 --era Run2_2017,run2_nanoAOD_94XMiniAODv1 --customise_commands="process.add_(cms.Service('InitRootHandlers', EnableIMT = cms.untracked.bool(False)))"
+```
+- Put myNanoProcMc_NANO.py in crab_cfg_step4.py: config.JobType.psetName = 'myNanoProcMc_NANO.py'
