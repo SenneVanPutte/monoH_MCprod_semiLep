@@ -52,6 +52,7 @@ process.NANOAODSIMoutput = cms.OutputModule("NanoAODOutputModule",
         filterName = cms.untracked.string('')
     ),
     fileName = cms.untracked.string('myNanoProcMc_NANO.root'),
+    fakeNameForCrab =cms.untracked.bool(True), #TO BE ABLE TO PUBLISH ON DAS!!!
     outputCommands = process.NANOAODSIMEventContent.outputCommands
 )
 
