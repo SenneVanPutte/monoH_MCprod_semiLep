@@ -35,7 +35,7 @@ process.maxEvents = cms.untracked.PSet(
 # Input source
 process.source = cms.Source("LHESource",
     dropDescendantsOfDroppedBranches = cms.untracked.bool(False),
-    fileNames = cms.untracked.vstring('file:Zprime_A0h_A0chichi_MZp2000_MA0300_slc6_amd64_gcc481_CMSSW_7_1_30.lhe')
+    fileNames = cms.untracked.vstring('file:2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_MH3_200_MH4_150_MH2_200_MHC_200.lhe')
 )
 
 process.options = cms.untracked.PSet(
@@ -62,7 +62,7 @@ process.RAWSIMoutput = cms.OutputModule("PoolOutputModule",
         filterName = cms.untracked.string('')
     ),
     eventAutoFlushCompressedSize = cms.untracked.int32(20971520),
-    fileName = cms.untracked.string('file:Zprime_A0h_A0chichi_MZp2000_MA0300.root'),
+    fileName = cms.untracked.string('file:2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_MH3_200_MH4_150_MH2_200_MHC_200_neg.root'),
     outputCommands = process.RAWSIMEventContent.outputCommands,
     splitLevel = cms.untracked.int32(0)
 )
