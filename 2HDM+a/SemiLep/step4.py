@@ -3,6 +3,7 @@
 # Revision: 1.19 
 # Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v 
 # with command line options: test94X -s NANO --mc --eventcontent NANOAODSIM --datatier NANOAODSIM --filein /store/mc/RunIIFall17MiniAOD/TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8/MINIAODSIM/94X_mc2017_realistic_v10-v1/60000/A0D71AEE-13E1-E711-B3C9-FA163E629498.root --no_exec --conditions auto:phase1_2017_realistic -n 1000 --era Run2_2017,run2_nanoAOD_94XMiniAODv1
+import sys
 import FWCore.ParameterSet.Config as cms
 
 from Configuration.StandardSequences.Eras import eras
@@ -28,10 +29,13 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 # Input source
 #process.inputDataset = '/TT_TuneCUETP8M2T4_13TeV-powheg-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM'
 
-process.source = cms.Source("PoolSource", fileNames = cms.untracked.vstring())
-process.source.fileNames = [
-	#'../../NanoAOD/test/lzma.root' ##you can change only this line
-]
+process.source = cms.Source("PoolSource", 
+    #fileNames = cms.untracked.vstring()
+    fileNames = cms.untracked.vstring('file:EXO-RunIIFall17wmLHEGS-2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_'+sys.argv[-2]+'_step2_'+ sys.argv[-1]+'.root'),
+)
+#process.source.fileNames = [
+#	#'../../NanoAOD/test/lzma.root' ##you can change only this line
+#]
 
 #process.source = cms.Source("PoolSource",
 #    fileNames = cms.untracked.vstring('/store/mc/RunIIFall17MiniAOD/TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8/MINIAODSIM/94X_mc2017_realistic_v10-v1/60000/A0D71AEE-13E1-E711-B3C9-FA163E629498.root'),

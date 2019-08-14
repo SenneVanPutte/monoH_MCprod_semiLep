@@ -25,20 +25,15 @@ if __name__ == '__main__':
 
             config.section_("General")
             config.General.transferLogs = True
-            config.General.workArea = '2HDM+a'
-            #config.General.requestName  = 'EXO-RunIIFall17wmLHEGS-Zprime_A0h_A0chichi_MZp800_MA0300_step0'
+            config.General.workArea = 'step0'
             #config.General.requestName  = 'EXO-RunIIFall17wmLHEGS-2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_'+mass_point+'_step0_'+sgn
             config.General.requestName  = '2HDMa_'+mass_point+'_step0_'+sgn
-            config.section_("General")
-            config.General.transferLogs = True
             
             config.section_("JobType")
             config.JobType.pluginName  = 'PrivateMC'
-            #config.JobType.psetName    = 'step0.py'
             config.JobType.psetName    = 'step0_'+sgn+'.py'
             config.JobType.pyCfgParams = [mass_point]
             #config.JobType.numCores = 1
-            #config.JobType.inputFiles = ['Zprime_A0h_A0chichi_MZp800_MA0300_slc6_amd64_gcc481_CMSSW_7_1_30.lhe']
             config.JobType.inputFiles = ['/eos/user/f/fernanpe/Fall2017_nAOD_v1_Full2017v2/2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_'+mass_point+'.lhe']
             config.JobType.disableAutomaticOutputCollection = False
             
@@ -46,17 +41,14 @@ if __name__ == '__main__':
             config.Data.splitting       = 'EventBased'
             config.Data.unitsPerJob     = 200
             config.Data.totalUnits 	    = 5000
-            #config.Data.outputDatasetTag = 'EXO-RunIIFall17wmLHEGS-Zprime_A0h_A0chichi_MZp800_MA0300_step0'
             config.Data.outputDatasetTag = 'EXO-RunIIFall17wmLHEGS-2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_'+mass_point+'_step0_'+sgn
             config.Data.publication     = True
-            #config.Data.outLFNDirBase = '/store/group/phys_muon/fernanpe/MonoH'
             config.Data.outLFNDirBase = '/store/user/svanputt/monoHiggs/'
-            config.Data.outputPrimaryDataset = 'CRAB_PrivateMC'
+            config.Data.outputPrimaryDataset = 'monoHiggsMC_2HDMa_gg_semiLep'
             
             config.section_("Site")
-            #config.Site.storageSite = 'T2_CH_CERN'
             config.Site.storageSite = 'T2_BE_IIHE'
-            #config.Site.storageSite = 'T2_ES_IFCA'
-            #config.Site.whitelist = ['T2_ES_IFCA']
-            crabCommand('submit', config=config, dryrun=True)
+
+            #crabCommand('submit', config=config, dryrun=True)
+            crabCommand('submit', config=config)
 

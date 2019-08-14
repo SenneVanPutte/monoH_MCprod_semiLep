@@ -3,6 +3,7 @@
 # Revision: 1.19 
 # Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v 
 # with command line options: step1 --filein file:SMP-RunIIFall17DRPremix-00084.root --fileout file:SMP-RunIIFall17MiniAODv2-00071.root --mc --eventcontent MINIAODSIM --runUnscheduled --datatier MINIAODSIM --conditions 94X_mc2017_realistic_v14 --step PAT --nThreads 4 --scenario pp --era Run2_2017,run2_miniAOD_94XFall17 --python_filename /afs/cern.ch/cms/PPD/PdmV/work/McM/submit/SMP-RunIIFall17MiniAODv2-00071/SMP-RunIIFall17MiniAODv2-00071_1_cfg.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 4800
+import sys
 import FWCore.ParameterSet.Config as cms
 
 from Configuration.StandardSequences.Eras import eras
@@ -28,7 +29,8 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('file:EXO-RunIIFall17wmLHEGS-Zp2HDM_Mzp400_MA0300_step2.root'),
+    #fileNames = cms.untracked.vstring('file:EXO-RunIIFall17wmLHEGS-Zp2HDM_Mzp400_MA0300_step2.root'),
+    fileNames = cms.untracked.vstring('file:EXO-RunIIFall17wmLHEGS-2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_'+sys.argv[-2]+'_step2_'+ sys.argv[-1]+'.root'),
     secondaryFileNames = cms.untracked.vstring()
 )
 
