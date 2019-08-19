@@ -1,5 +1,9 @@
 from CRABClient.UserUtilities import config
 
+cmd_str = 'dasgoclient -query="dataset=/monoHiggsMC_2HDMa_gg_semiLep*/*step1*/USER instance=prod/phys03"'
+out_cmd = os.popen(cmd_str).read()
+out_list = out_cmd.split('\n')
+
 #from WMCore.Configuration import Configuration
 config = config()
 
@@ -23,33 +27,29 @@ if __name__ == '__main__':
         for mass_point in mc_sets:
             print('--- Mass point: ' + mass_point ) 
 
+            in_dtset = []   
+            for dataset in out_list:
+                if sgn in dataset and mass_point in dataset:
+                    in_dtset.append(dataset)
+
+            if len(in_dtset) == 0: raise IOError('Previous step data set on DAS not found')
+            if len(in_dtset) > 1: 
+                print('WARNING: multiple matches for config.Data.inputDataset:' )
+                print(in_dtset)
+                raw_input('Proceed with [0]? (press enter if yes ctrl C otherwise)')
+
+            print('Dataset previous step: ' + in_dtset[0])
 
             config.section_("General")
             config.General.transferLogs = True
             config.General.workArea = 'step2'
             config.General.requestName  = '2HDMa_'+mass_point+'_step2_'+sgn
             
-#config.section_("General")
-#config.General.transferLogs = True
-#config.General.requestName = 'EXO-RunIIFall17wmLHEGS-Zprime_A0h_A0chichi_MZp400_MA0300_step2' 
-#config.General.workArea = 'crab_projects'
-
             config.section_("JobType")
             config.JobType.pluginName  = 'Analysis'
             config.JobType.psetName    = 'step2.py'
             config.JobType.pyCfgParams = [mass_point, sgn]
             config.JobType.maxMemoryMB = 10000
-
-            #config.JobType.numCores = 1
-            #config.JobType.inputFiles = ['Zprime_A0h_A0chichi_MZp800_MA0300_slc6_amd64_gcc481_CMSSW_7_1_30.lhe']
-            #config.JobType.inputFiles = ['/eos/user/f/fernanpe/Fall2017_nAOD_v1_Full2017v2/2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_'+mass_point+'.lhe']
-            #config.JobType.disableAutomaticOutputCollection = False
-            
-#config.section_("JobType")
-#config.JobType.pluginName  = 'Analysis'
-#config.JobType.psetName = 'step2.py'
-#config.JobType.maxMemoryMB = 10000
-
 
             config.section_("Data")
             config.Data.splitting       = 'FileBased'
@@ -58,26 +58,10 @@ if __name__ == '__main__':
             config.Data.inputDBS = 'phys03'
             config.Data.outLFNDirBase = '/store/user/svanputt/monoHiggs/'
             config.Data.publication     = True
-            #config.Data.outputPrimaryDataset = 'CRAB_PrivateMC'
-            #config.Data.outputPrimaryDataset = 'monoHiggsMC_2HDMa_gg_semiLep'
-            
-            config.Data.inputDataset = 'monoHiggsMC_2HDMa_gg_semiLep/*EXO-RunIIFall17wmLHEGS-2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_'+mass_point+'_step1_'+sgn+'*/USER'
-
-#config.section_("Data")
-#config.Data.splitting       = 'FileBased'
-#config.Data.unitsPerJob = 1
-#config.Data.outputDatasetTag = 'EXO-RunIIFall17wmLHEGS-Zprime_A0h_A0chichi_MZp400_MA0300_step2'
-#config.Data.inputDBS = 'phys03'
-#config.Data.outLFNDirBase = '/store/group/phys_muon/fernanpe/MonoH/' 
-#config.Data.publication = True
-config.Data.inputDataset = '/CRAB_PrivateMC/fernanpe-EXO-RunIIFall17wmLHEGS-Zprime_A0h_A0chichi_MZp400_MA0300_step1-5b9cd2c7eef36524de7af1c8e43b0ebc/USER'
-
+            config.Data.inputDataset = in_dtset[0]
 
             config.section_("Site")
             config.Site.storageSite = 'T2_BE_IIHE'
 
             crabCommand('submit', config=config, dryrun=True)
             #crabCommand('submit', config=config)
-
-#config.section_("Site")
-#config.Site.storageSite = 'T2_CH_CERN'
