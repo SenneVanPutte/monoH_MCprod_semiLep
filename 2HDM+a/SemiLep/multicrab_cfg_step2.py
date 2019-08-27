@@ -1,5 +1,15 @@
 from CRABClient.UserUtilities import config
 
+import optparse
+from optparse import OptionParser
+
+usage = 'usage: %prog [options]'
+parser = optparse.OptionParser(usage)
+parser.add_option('--skip', dest='skip', help='Skip these mass points (string that contains mass point and sign, comma seperated, no " " in between)', type='string', default='')
+(options, args) = parser.parse_args()
+
+skip_p = options.skip.split(',')
+
 cmd_str = 'dasgoclient -query="dataset=/monoHiggsMC_2HDMa_gg_semiLep*/*step1*/USER instance=prod/phys03"'
 out_cmd = os.popen(cmd_str).read()
 out_list = out_cmd.split('\n')
@@ -26,6 +36,13 @@ if __name__ == '__main__':
         print('----- Sarting the ' + sgn + ' config\'s') 
         for mass_point in mc_sets:
             print('--- Mass point: ' + mass_point ) 
+
+            to_skip = False
+            for skp in skip_p:
+                if mass_point in skp and sgn in skp: to_skip = True 
+            if to_skip: 
+                print('skipped')
+                continue
 
             in_dtset = []   
             for dataset in out_list:

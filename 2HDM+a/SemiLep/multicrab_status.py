@@ -5,7 +5,7 @@ from CRABClient.UserUtilities import config
 #from WMCore.Configuration import Configuration
 config = config()
 
-start_dir = 'step0'
+start_dir = 'step1'
 
 list_dir = os.listdir(start_dir)
 
