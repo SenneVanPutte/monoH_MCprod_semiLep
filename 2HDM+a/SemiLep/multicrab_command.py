@@ -11,7 +11,7 @@ LOGLEVEL_ON = getConsoleLogLevel()
 usage = 'usage: %prog [options]'
 parser = optparse.OptionParser(usage)
 parser.add_option('--start-dir', dest='start_dir', help='Directory containing crab job dirs', type='string')
-parser.add_option('--cmd', dest='cr_cmd', help='Command to submit to all crab dires in start-dir, special command is failed_resubmit', type='string')
+parser.add_option('--cmd', dest='cr_cmd', help='Command to submit to all crab dires in start-dir, special commands are: failed_resubmit, resubmit, status_summary', type='string')
 (options, args) = parser.parse_args()
 
 #from WMCore.Configuration import Configuration
@@ -68,7 +68,18 @@ if __name__ == '__main__':
         for diri in list_dir:
             target = start_dir + '/' + diri
             if target in failed_list: crabCommand(options.cr_cmd, d=target)
+       
+    elif options.cr_cmd == 'status_summary':
+        print('received command ' + options.cr_cmd)
+        setConsoleLogLevel(LOGLEVEL_MUTE)
+        for diri in list_dir:
+            target = start_dir + '/' + diri
+            print('Sending ' + options.cr_cmd + ' to ' + target)
+            resp = crabCommand('status', d=target)
+            print('    Status: '+resp['status']+',\t\t DagStatus: '+resp['dagStatus'])
+        setConsoleLogLevel(LOGLEVEL_ON) 
         
+ 
     else:
         for diri in list_dir:
             target = start_dir + '/' + diri

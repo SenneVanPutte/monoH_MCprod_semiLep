@@ -1,3 +1,4 @@
+import os
 from CRABClient.UserUtilities import config
 
 import optparse
@@ -80,6 +81,6 @@ if __name__ == '__main__':
             config.section_("Site")
             config.Site.storageSite = 'T2_BE_IIHE'
 
-            crabCommand('submit', config=config, dryrun=True)
-            #crabCommand('submit', config=config)
+            #crabCommand('submit', config=config, dryrun=True)
+            crabCommand('submit', config=config)
 

@@ -1,3 +1,4 @@
+import os
 from CRABClient.UserUtilities import config
 
 import optparse
