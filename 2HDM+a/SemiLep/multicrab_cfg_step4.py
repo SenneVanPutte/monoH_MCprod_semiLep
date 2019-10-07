@@ -11,7 +11,7 @@ parser.add_option('--skip', dest='skip', help='Skip these mass points (string th
 
 skip_p = options.skip.split(',')
 
-cmd_str = 'dasgoclient -query="dataset=/monoHiggsMC_2HDMa_gg_semiLep*/*step3*/USER instance=prod/phys03"'
+cmd_str = 'dasgoclient -query="dataset=/monoHiggsMC_2HDMa_semiLep*/*step3*/USER instance=prod/phys03"'
 out_cmd = os.popen(cmd_str).read()
 out_list = out_cmd.split('\n')
 
@@ -60,19 +60,19 @@ if __name__ == '__main__':
 
             config.section_("General")
             config.General.transferLogs = True
-            config.General.workArea = 'step4'
-            config.General.requestName  = '2HDMa_'+mass_point+'_step4_'+sgn
+            config.General.workArea = 'NANO'
+            config.General.requestName  = '2HDMa_'+mass_point+'_NANO_'+sgn
             
             config.section_("JobType")
             config.JobType.pluginName  = 'Analysis'
-            config.JobType.psetName    = 'step4.py'
+            config.JobType.psetName    = 'myNanoProcMc_NANO.py'
             config.JobType.pyCfgParams = [mass_point, sgn]
             config.JobType.maxMemoryMB = 10000
 
             config.section_("Data")
             config.Data.splitting       = 'FileBased'
             config.Data.unitsPerJob = 1
-            config.Data.outputDatasetTag = 'EXO-RunIIFall17wmLHEGS-2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_'+mass_point+'_step4_'+sgn
+            config.Data.outputDatasetTag = 'EXO-RunIIFall17wmLHEGS-2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_'+mass_point+'_NANO_'+sgn
             config.Data.inputDBS = 'phys03'
             config.Data.outLFNDirBase = '/store/user/svanputt/monoHiggs/'
             config.Data.publication     = True
@@ -81,5 +81,5 @@ if __name__ == '__main__':
             config.section_("Site")
             config.Site.storageSite = 'T2_BE_IIHE'
 
-            crabCommand('submit', config=config, dryrun=True)
-            #crabCommand('submit', config=config)
+            #crabCommand('submit', config=config, dryrun=True)
+            crabCommand('submit', config=config)

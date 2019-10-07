@@ -29,14 +29,15 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(10000)
+    input = cms.untracked.int32(10)
 )
 
 
 # Input source
 process.source = cms.Source("LHESource",
     dropDescendantsOfDroppedBranches = cms.untracked.bool(False),
-    fileNames = cms.untracked.vstring('file:2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_'+sys.argv[-1]+'.lhe')
+    #fileNames = cms.untracked.vstring('file:2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_'+sys.argv[-1]+'.lhe')
+    fileNames = cms.untracked.vstring('file:/eos/user/f/fernanpe/Fall2017_nAOD_v1_Full2017v2/2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_MH3_1200_MH4_150_MH2_1200_MHC_1200.lhe')
 )
 
 process.options = cms.untracked.PSet(
@@ -63,7 +64,7 @@ process.RAWSIMoutput = cms.OutputModule("PoolOutputModule",
         filterName = cms.untracked.string('')
     ),
     eventAutoFlushCompressedSize = cms.untracked.int32(20971520),
-    fileName = cms.untracked.string('file:2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_'+sys.argv[-1]+'_neg.root'),
+    fileName = cms.untracked.string('file:2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_MH3_1200_MH4_150_MH2_1200_MHC_1200_neg.root'),
     outputCommands = process.RAWSIMEventContent.outputCommands,
     splitLevel = cms.untracked.int32(0)
 )

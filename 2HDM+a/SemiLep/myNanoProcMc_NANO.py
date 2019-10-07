@@ -2,13 +2,12 @@
 # using: 
 # Revision: 1.19 
 # Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v 
-# with command line options: test94X -s NANO --mc --eventcontent NANOAODSIM --datatier NANOAODSIM --filein /store/mc/RunIIFall17MiniAOD/TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8/MINIAODSIM/94X_mc2017_realistic_v10-v1/60000/A0D71AEE-13E1-E711-B3C9-FA163E629498.root --no_exec --conditions auto:phase1_2017_realistic -n 1000 --era Run2_2017,run2_nanoAOD_94XMiniAODv1
-import sys
+# with command line options: myNanoProcMc -s NANO --eventcontent NANOAODSIM --datatier NANOAODSIM --no_exec --conditions 94X_mc2017_realistic_v14 --era Run2_2017,run2_nanoAOD_94XMiniAODv1 --customise_commands=process.add_(cms.Service('InitRootHandlers', EnableIMT = cms.untracked.bool(False)))
 import FWCore.ParameterSet.Config as cms
 
 from Configuration.StandardSequences.Eras import eras
 
-process = cms.Process('NANO',eras.Run2_2017,eras.run2_nanoAOD_94XMiniAODv1) # Run2_2017, eras.run2_nanoAOD_94XMiniAODv1
+process = cms.Process('NANO',eras.Run2_2017,eras.run2_nanoAOD_94XMiniAODv1)
 
 # import of standard configurations
 process.load('Configuration.StandardSequences.Services_cff')
@@ -22,25 +21,15 @@ process.load('PhysicsTools.NanoAOD.nano_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
-#process.maxEvents = cms.untracked.PSet(
-#    input = cms.untracked.int32(1000)
-#)
+process.maxEvents = cms.untracked.PSet(
+    input = cms.untracked.int32(1)
+)
 
 # Input source
-#process.inputDataset = '/TT_TuneCUETP8M2T4_13TeV-powheg-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM'
-
-process.source = cms.Source("PoolSource", 
-    #fileNames = cms.untracked.vstring()
-    fileNames = cms.untracked.vstring('file:EXO-RunIIFall17wmLHEGS-2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_'+sys.argv[-2]+'_step3_'+ sys.argv[-1]+'.root'),
+process.source = cms.Source("PoolSource",
+    fileNames = cms.untracked.vstring('file:myNanoProcMc_PAT.root'),
+    secondaryFileNames = cms.untracked.vstring()
 )
-#process.source.fileNames = [
-#	#'../../NanoAOD/test/lzma.root' ##you can change only this line
-#]
-
-#process.source = cms.Source("PoolSource",
-#    fileNames = cms.untracked.vstring('/store/mc/RunIIFall17MiniAOD/TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8/MINIAODSIM/94X_mc2017_realistic_v10-v1/60000/A0D71AEE-13E1-E711-B3C9-FA163E629498.root'),
-#    secondaryFileNames = cms.untracked.vstring()
-#)
 
 process.options = cms.untracked.PSet(
 
@@ -48,7 +37,7 @@ process.options = cms.untracked.PSet(
 
 # Production Info
 process.configurationMetadata = cms.untracked.PSet(
-    annotation = cms.untracked.string('nanoAOD by Pedro'),
+    annotation = cms.untracked.string('myNanoProcMc nevts:1'),
     name = cms.untracked.string('Applications'),
     version = cms.untracked.string('$Revision: 1.19 $')
 )
@@ -62,7 +51,8 @@ process.NANOAODSIMoutput = cms.OutputModule("NanoAODOutputModule",
         dataTier = cms.untracked.string('NANOAODSIM'),
         filterName = cms.untracked.string('')
     ),
-    fileName = cms.untracked.string('tree.root'),
+    fileName = cms.untracked.string('myNanoProcMc_NANO.root'),
+    fakeNameForCrab =cms.untracked.bool(True), #TO BE ABLE TO PUBLISH ON DAS!!!
     outputCommands = process.NANOAODSIMEventContent.outputCommands
 )
 
@@ -70,7 +60,6 @@ process.NANOAODSIMoutput = cms.OutputModule("NanoAODOutputModule",
 
 # Other statements
 from Configuration.AlCa.GlobalTag import GlobalTag
-#process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:run2_data_relval', '')
 process.GlobalTag = GlobalTag(process.GlobalTag, '94X_mc2017_realistic_v14', '')
 
 # Path and EndPath definitions
@@ -95,6 +84,7 @@ process = nanoAOD_customizeMC(process)
 
 # Customisation from command line
 
+process.add_(cms.Service('InitRootHandlers', EnableIMT = cms.untracked.bool(False)))
 # Add early deletion of temporary data products to reduce peak memory need
 from Configuration.StandardSequences.earlyDeleteSettings_cff import customiseEarlyDelete
 process = customiseEarlyDelete(process)

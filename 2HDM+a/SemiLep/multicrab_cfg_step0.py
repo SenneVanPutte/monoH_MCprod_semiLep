@@ -44,7 +44,7 @@ if __name__ == '__main__':
             config.Data.outputDatasetTag = 'EXO-RunIIFall17wmLHEGS-2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_'+mass_point+'_step0_'+sgn
             config.Data.publication     = True
             config.Data.outLFNDirBase = '/store/user/svanputt/monoHiggs/'
-            config.Data.outputPrimaryDataset = 'monoHiggsMC_2HDMa_gg_semiLep'
+            config.Data.outputPrimaryDataset = 'monoHiggsMC_2HDMa_semiLep'
             
             config.section_("Site")
             config.Site.storageSite = 'T2_BE_IIHE'

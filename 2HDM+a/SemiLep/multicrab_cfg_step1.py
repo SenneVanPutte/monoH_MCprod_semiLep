@@ -11,7 +11,7 @@ parser.add_option('--skip', dest='skip', help='Skip these mass points (string th
 
 skip_p = options.skip.split(',')
 
-cmd_str = 'dasgoclient -query="dataset=/monoHiggsMC_2HDMa_gg_semiLep*/*step0*/USER instance=prod/phys03"'
+cmd_str = 'dasgoclient -query="dataset=/monoHiggsMC_2HDMa_semiLep*/*step0*/USER instance=prod/phys03"'
 out_cmd = os.popen(cmd_str).read()
 out_list = out_cmd.split('\n')
 
