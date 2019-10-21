@@ -1,0 +1,3 @@
+
+# multicrab status
+python multicrab_command.py --start-dir=step3 --cmd=status_summary

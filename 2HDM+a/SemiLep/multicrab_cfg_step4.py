@@ -19,16 +19,19 @@ out_list = out_cmd.split('\n')
 config = config()
 
 mc_sets = [
-    'MH3_1200_MH4_150_MH2_1200_MHC_1200', 
-    'MH3_200_MH4_150_MH2_200_MHC_200', 
-    'MH3_300_MH4_150_MH2_300_MHC_300', 
-    'MH3_400_MH4_150_MH2_400_MHC_400', 
-    'MH3_500_MH4_150_MH2_500_MHC_500', 
-    'MH3_700_MH4_150_MH2_700_MHC_700', 
+    #'MH3_1200_MH4_150_MH2_1200_MHC_1200', 
+    #'MH3_200_MH4_150_MH2_200_MHC_200', 
+    #'MH3_300_MH4_150_MH2_300_MHC_300', 
+    #'MH3_400_MH4_150_MH2_400_MHC_400', 
+    #'MH3_500_MH4_150_MH2_500_MHC_500', 
+    #'MH3_700_MH4_150_MH2_700_MHC_700', 
     'MH3_900_MH4_150_MH2_900_MHC_900'
     ]
 
-sign = ['pos', 'neg']
+sign = [
+    #'pos', 
+    'neg'
+    ]
 
 if __name__ == '__main__':
     from CRABAPI.RawCommand import crabCommand
@@ -60,19 +63,19 @@ if __name__ == '__main__':
 
             config.section_("General")
             config.General.transferLogs = True
-            config.General.workArea = 'NANO'
-            config.General.requestName  = '2HDMa_'+mass_point+'_NANO_'+sgn
+            config.General.workArea = 'NANOv4'
+            config.General.requestName  = '2HDMa_'+mass_point+'_NANOv4_'+sgn
             
             config.section_("JobType")
             config.JobType.pluginName  = 'Analysis'
-            config.JobType.psetName    = 'myNanoProcMc_NANO.py'
+            config.JobType.psetName    = 'myNanoProcMcv4_NANO.py'
             config.JobType.pyCfgParams = [mass_point, sgn]
             config.JobType.maxMemoryMB = 10000
 
             config.section_("Data")
             config.Data.splitting       = 'FileBased'
             config.Data.unitsPerJob = 1
-            config.Data.outputDatasetTag = 'EXO-RunIIFall17wmLHEGS-2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_'+mass_point+'_NANO_'+sgn
+            config.Data.outputDatasetTag = 'EXO-RunIIFall17wmLHEGS-2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_'+mass_point+'_NANOv4_'+sgn
             config.Data.inputDBS = 'phys03'
             config.Data.outLFNDirBase = '/store/user/svanputt/monoHiggs/'
             config.Data.publication     = True

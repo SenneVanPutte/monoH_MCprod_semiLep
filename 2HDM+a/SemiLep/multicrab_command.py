@@ -76,7 +76,27 @@ if __name__ == '__main__':
             target = start_dir + '/' + diri
             print('Sending ' + options.cr_cmd + ' to ' + target)
             resp = crabCommand('status', d=target)
-            print('    Status: '+resp['status']+',\t\t DagStatus: '+resp['dagStatus'])
+            st_dict = {}
+            st_lst  = ['finished', 'running', 'idle', 'unsubmitted'] 
+            if 'jobsPerStatus' in resp: st_dict = resp['jobsPerStatus']
+            prt_str = 'Status: '+resp['status']+',\t\t DagStatus: '+resp['dagStatus']
+            fin = 0
+            tot = 0
+            for stat in st_lst: 
+                if stat in st_dict: 
+                    prt_str += ',\t ' + stat + ': ' + str(st_dict[stat])
+                    if stat == 'finished': fin += int(st_dict[stat])
+            for key in st_dict:
+                tot += int(st_dict[key])
+                if key not in st_lst: prt_str += ',\t ' + key + ': ' + str(st_dict[key])
+            if tot == 0: tot +=1
+            #prog_str = '\t[{: 4.1f}%],\t '.format((fin +0.)/(tot +0.)*100)
+            fil_str = ' '
+            if fin == tot: fil_str = ''
+            if (fin +0.)/(tot +0.)*100 < 10.0: fil_str = '  '
+            prog_str = '\t['+fil_str+'{:<4}% ],\t '.format('{: 4.1f}'.format((fin +0.)/(tot +0.)*100) )
+            print(prog_str+prt_str)
+            
         setConsoleLogLevel(LOGLEVEL_ON) 
         
  
