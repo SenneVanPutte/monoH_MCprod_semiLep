@@ -1,3 +1,5 @@
+# multi sub
+./multi_sub_step0.sh
 
 # multicrab status
 python multicrab_command.py --start-dir=step3 --cmd=status_summary

@@ -19,7 +19,8 @@ config = config()
 
 start_dir = options.start_dir
 
-list_dir = os.listdir(start_dir)
+list_dir = [diry for diry in os.listdir(start_dir) if os.path.isdir(start_dir+'/'+diry)]
+#print(list_dir)
 
 def read_status(key='status', check='SUBMITFAILED'):
     check_list = []
