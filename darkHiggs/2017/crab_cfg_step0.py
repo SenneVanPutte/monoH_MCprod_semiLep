@@ -33,7 +33,7 @@ config.section_("JobType")
 config.JobType.pluginName  = 'PrivateMC'
 config.JobType.psetName    = 'step0_'+sgn+'.py'
 config.JobType.pyCfgParams = [mp]
-config.JobType.inputFiles = ['/eos/user/c/calderon/LatinoTrees/darkHiggs/bigProduction/darkHiggs_theta_0p01_gq_0p25_gx_1p0_'+sys.argv[-1]+'_WW.lhe.gz']
+config.JobType.inputFiles = ['/eos/user/c/calderon/LatinoTrees/darkHiggs/bigProduction/darkHiggs_theta_0p01_gq_0p25_gx_1p0_'+mp+'_WW.lhe.gz']
 config.JobType.disableAutomaticOutputCollection = False
 
 config.section_("Data")
