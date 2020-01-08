@@ -36,7 +36,7 @@ process.maxEvents = cms.untracked.PSet(
 process.source = cms.Source("LHESource",
     dropDescendantsOfDroppedBranches = cms.untracked.bool(False),
     #fileNames = cms.untracked.vstring('file:2HDMa_gg_sinp_0p35_tanb_1p0_mXd_10_'+sys.argv[-1]+'.lhe')
-    fileNames = cms.untracked.vstring('file:/eos/user/c/calderon/LatinoTrees/darkHiggs/bigProduction/darkHiggs_theta_0p01_gq_0p25_gx_1p0_'+sys.argv[-1]+'_WW.lhe.gz')
+    fileNames = cms.untracked.vstring('file:darkHiggs_theta_0p01_gq_0p25_gx_1p0_'+sys.argv[-1]+'_WW.lhe')
 )
 
 process.options = cms.untracked.PSet(
