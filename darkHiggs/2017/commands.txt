@@ -1,0 +1,7 @@
+
+
+
+
+# cmddriver
+cmsDriver.py monoH_MC_production_2017/darkHiggs/2017/pythia8_hadronizer_nomatching_HWWjjlnu_cff_CP3.py --fileout file:EXO-RunIIFall17wmLHEGS-HWWjjlnu.root --mc --eventcontent RAWSIM,LHE --datatier GEN-SIM,LHE --conditions 93X_mc2017_realistic_v3 --beamspot Realistic25ns13TeVEarly2017Collision --step LHE,GEN,SIM --nThreads 8 --geometry DB:Extended --era Run2_2017 --python_filename step0_HWWjjlnu.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 10000
+
