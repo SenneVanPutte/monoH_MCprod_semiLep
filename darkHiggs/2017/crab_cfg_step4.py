@@ -1,4 +1,5 @@
 import os
+import json
 from CRABClient.UserUtilities import config
 
 import optparse
@@ -71,7 +72,7 @@ config.section_("JobType")
 config.JobType.pluginName  = 'Analysis'
 config.JobType.psetName    = 'myNanoProcMcv4_NANO.py'
 config.JobType.pyCfgParams = [mp, sgn]
-config.JobType.maxMemoryMB = 10000
+config.JobType.maxMemoryMB = 5000
 
 config.section_("Data")
 config.Data.splitting       = 'FileBased'
